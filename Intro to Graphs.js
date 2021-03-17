@@ -254,3 +254,39 @@ Interesting observation: All acyclic graphs can be bi-partite, but in the case o
 Some popular types of bipartite graphs are: 
 Star Graph, Acyclic Graph, Path Graph
 */
+
+// Graph Traversal Algorithms
+
+/*
+
+There are 2 basic techniques of Graph traversal: 
+BFS : Breadth First Search
+DFS : Depth First Search
+
+Since any traversal needs a starting point, but a graph doesn't have a linear structure like arrays or stacks. 
+So how do we give a graph traversal a better sense of direction.
+
+This is where the concept of levels in graphs comes in.
+Take any vertex as the starting point; this is the lowest level in your search.
+The next level consists of all the vertices adjacent to your vertex.
+A level higher would be the vertices adjacent to these nodes.
+
+*/
+
+// B F S
+
+/*
+The BFS algorithm earns its name because it grows breadth-wise. All the nodes at a cetain level are traversed before moving on to the next level.
+The level-wise expansion ensures that for any starting vertex, you can reach all others one level at a time
+Take care, the BFS traversal order may change depending if its a directed or undirected graph
+*/
+
+// D F S
+
+/*
+The DFS algorithm is the opposite of BFS in the sense that it grows depth-wise.
+
+Starting from any node, we keep moving to an adjacent node until we reach the farthest level. Then we move back to the starting point and pick another adjacent node.
+Once again we probe to the farthest level and move back. This process continues until all nodes are visited.
+*/
+
