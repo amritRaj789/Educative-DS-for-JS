@@ -236,3 +236,21 @@ Remove Edge     O(E)              O(1)
 // So from the above we can see that each method of graph representation has its own benefits
 // If your model frequently manipulates vertices, the adjacency list is a better choice
 // If you are primarily dealing with edges, the adjacency matrix is the more efficient approach
+
+Bipartite Graph
+
+/*
+
+The Bipartite graph is a special member of the graph family. The vertices of this graph are divided 
+into two disjoint parts in a way that no 2 vertices in the same part are adjacent to each other.
+
+The bipartite graph is a type of k-partite graph where k is 2.
+In a 5-partite graph, we would have 5 disjointed sets, and members of a set would not be adjacent to each other.
+
+e.g : red -->green -->red -->green
+
+Interesting observation: All acyclic graphs can be bi-partite, but in the case of cyclic graphs, they must have an even no. of vertices.
+
+Some popular types of bipartite graphs are: 
+Star Graph, Acyclic Graph, Path Graph
+*/
