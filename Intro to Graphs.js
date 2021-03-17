@@ -224,3 +224,15 @@ class Graph {
 		}
 	}
 }
+
+// Complexities of Graph Operation
+Operation       Adjacency List      Adjacency Matrix
+
+Add Vertex      O(1)              O(V^2)
+Remove Vertex   O(V+E)            O(V^2)
+Add Edge        O(1)              O(1)
+Remove Edge     O(E)              O(1)
+
+// So from the above we can see that each method of graph representation has its own benefits
+// If your model frequently manipulates vertices, the adjacency list is a better choice
+// If you are primarily dealing with edges, the adjacency matrix is the more efficient approach
