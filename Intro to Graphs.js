@@ -331,3 +331,87 @@ function bfsTraversalHelper(g, source, obj, visited){
     }
   }
 }
+
+
+// Implementing DFS using Stacks
+// My Method
+function dfsTraversal(g) {
+  if(g.vertices < 1)
+    return null;
+  let obj = {result: ""};
+  let visited = new Array(g.vertices).fill(false);
+  let stack = new Stack();
+
+  for(let i = 0; i < g.vertices; i++){
+    if(!visited[i]){
+      obj.result += String(i);
+      visited[i] = true;
+      travel(g, i, obj, visited);
+    }
+  }
+  return obj.result;
+  function travel(g, source, obj, visited){
+    let node = g.list[source].getHead();
+    while(node !== null){
+      if(visited[node.data]){
+        node = node.nextElement;
+      }
+      else{
+        visited[node.data] = true;
+        stack.push(source);
+        obj.result += String(node.data);
+        travel(g, node.data, obj, visited);
+      }
+    }
+    if(!stack.isEmpty())
+      travel(g, stack.pop(), obj, visited);
+    return;
+  }
+
+}
+
+// Educative's method
+function dfsTraversal_helper (g, source, visited, obj) {
+  //Create Stack(Implemented in previous lesson) for Depth First Traversal and Push source in it
+  let stack = new Stack(g.vertices);
+  stack.push(source);
+  visited[source] = true;
+  //Traverse while stack is not empty
+  while (stack.isEmpty() == false) {
+    //Pop a vertex/node from stack and add it to the result
+    let current_node = stack.pop();
+    obj.result += String(current_node);
+    //Get adjacent vertices to the current_node from the array,
+    //and if they are not already visited then push them in the stack
+    let temp = g.list[current_node].getHead();
+    while (temp != null) {
+      if (visited[temp.data] == false) {
+        stack.push(temp.data);
+         visited[temp.data] = true;
+      }
+      temp = temp.nextElement;
+    } 
+  }
+}
+function dfsTraversal(g)
+{
+  if (g.vertices < 1){
+    return null;
+  }
+  
+  var obj = {result: ''}
+
+  //An array to hold the history of visited nodes
+  //Make a node visited whenever you push it into stack
+  var visited = [];
+  for (var x = 0; x < g.vertices; x++) {
+    visited.push(false);
+  }
+    
+  for (var i = 0; i < g.vertices; i++) {
+    if (!visited[i])
+      dfsTraversal_helper(g, i, visited, obj);
+  }
+
+  return obj.result;
+}
