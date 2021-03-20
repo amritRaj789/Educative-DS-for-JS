@@ -290,3 +290,44 @@ Starting from any node, we keep moving to an adjacent node until we reach the fa
 Once again we probe to the farthest level and move back. This process continues until all nodes are visited.
 */
 
+// Challenge 1
+// Implementing BFS in JS
+
+"use strict";
+const LinkedList = require('./LinkedList.js');
+const Node = require('./Node.js');
+const Queue = require('./Queue.js');
+const Graph = require('./Graph.js');
+
+//Create Queue => let queue = new Queue(5), where 5 is size of queue
+//Functions of Queue => queue.enqueue(int), queue.dequeue(), queue.isEmpty() 
+//Breadth First Traversal of Graph g from source vertex 
+function bfsTraversal (g){
+  if(g.vertices < 1)
+    return null;
+  let object = {result: ""};
+  let visited = new Array(g.vertices).fill(false);
+  for(let i = 0; i < g.vertices; i++){
+    if(!visited[i])
+    bfsTraversalHelper(g, i, object, visited);
+  }
+  return object.result;
+}
+
+function bfsTraversalHelper(g, source, obj, visited){
+  let queue = new Queue();
+  queue.enqueue(source);
+  visited[source] = true;
+  while(!queue.isEmpty()){
+    let num = queue.dequeue();
+    obj.result = obj.result + String(num);
+    let temp = g.list[num].getHead();
+    while(temp){
+      if(!visited[temp.data]){
+        queue.enqueue(temp.data);
+        visited[temp.data] = true;
+      }
+      temp = temp.nextElement;
+    }
+  }
+}
