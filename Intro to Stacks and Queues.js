@@ -514,7 +514,7 @@ class minStack {
 class minStack {
 	constructor(){
 		this.mainStack = new Stack()
-		this.mainStack = new Stack()
+		this.minStack = new Stack()
 	}
 
 	pop(){

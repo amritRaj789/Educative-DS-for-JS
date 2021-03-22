@@ -415,3 +415,44 @@ function dfsTraversal(g)
 
   return obj.result;
 }
+
+
+
+
+// Detect Cycle in Graph
+
+//My solution
+function detectCycle(g){
+  let object = {result: false};
+  let visited = new Array(g.vertices).fill(false);
+  let i = 0;
+  while(i < g.vertices && object.result === false){
+    if(!visited[i]){
+      visited[i] = true;
+      helper(g, i, visited, object);
+    }
+    i++;
+  }
+  return object.result;
+}
+
+function helper (g, source, visited, object){
+  let stack = new Stack();
+  stack.push(source);
+
+  while(!stack.isEmpty()){
+    let temp = stack.pop();
+    let node = g.list[temp].getHead();
+    while(node !== null){
+      if(visited[node.data]){
+        object.result = true;
+        return
+      }
+      else{
+        stack.push(node.data);
+        visited[node.data] = true;
+      }
+      node = node.nextElement;
+    }
+  }
+}
