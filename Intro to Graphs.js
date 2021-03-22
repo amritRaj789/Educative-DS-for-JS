@@ -456,3 +456,35 @@ function helper (g, source, visited, object){
     }
   }
 }
+
+//Mother vertex in a Graph
+
+//My solution
+function findMotherVertex (g){
+  let found = {value: -1};
+  for(let i = 0; i < g.vertices; i++){
+    let count = 0;
+    let visited = new Array(g.vertices).fill(false);
+    visited[i] = true;
+    let stack = new Stack();
+    stack.push(i);
+    while(!stack.isEmpty()){
+      let temp = stack.pop();
+      count++;
+      let node = g.list[temp].getHead();
+      while(node !== null){
+        if(!visited[node.data]){
+          visited[node.data] = true;
+          stack.push(node.data);
+        }
+        node = node.nextElement;
+      }
+    }
+    if(count === g.vertices){
+      found.value = i;
+      break;
+    }
+  }
+  return found.value;
+}
+
