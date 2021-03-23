@@ -609,3 +609,38 @@ function isTree(g) {
   return true;
 }
 
+// find shortest path between 2 vertices
+function findMin (g, source, destination){
+  if(source === destination)
+    return 0;
+  let minLength = +Infinity;
+  check(g, source, 0);
+  function check(g, source, length){
+    if(length >= minLength)
+      return
+    let node = g.list[source].getHead();
+    if(node === null)
+      return
+    else{
+      length++;
+      while(node !== null){
+        if(node.data == destination){
+          minLength = Math.min(minLength, length);
+          return
+        }
+        else{
+          check(g, node.data, length);
+          node = node.nextElement;
+        }  
+      }
+    }
+  }
+  if(minLength === +Infinity)
+    return -1;
+  else
+    return minLength;
+}
+
+
+
+
