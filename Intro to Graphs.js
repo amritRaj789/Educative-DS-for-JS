@@ -488,3 +488,47 @@ function findMotherVertex (g){
   return found.value;
 }
 
+//Note : This is actually the brute-force solution. We could have done it using BFS as well
+// This takes O(V(V+E))
+
+// Efficient Solution O(V+E)
+
+function findMotherVertex(g){
+  let visited = new Array(g.vertices).fill(false);
+  let lastV ;
+
+  for(let i = 0; i < g.vertices; i++){
+    if(!visited[i]){
+      dfs(g, i, visited);
+      lastV = i;
+    }
+  }
+  for(let i = 0; i < g.vertices; i++){
+    visited[i] = false;
+  }
+  dfs(g, lastV, visited);
+  for(let i = 0; i < g.vertices; i++){
+    if(visited[i] === false)
+      return -1;
+  }
+  return lastV;
+}
+
+
+function dfs (g, i, visited){
+  let stack = new Stack();
+  stack.push(i);
+  visited[i] = true;
+
+  while(!stack.isEmpty()){
+    let temp = stack.pop();
+    let node = g.list[temp].getHead();
+    while(node !== null){
+      if(!visited[node.data]){
+        visited[node.data] = true;
+        stack.push(node.data);
+      }
+      node = node.nextElement;
+    }
+  }
+}
