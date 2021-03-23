@@ -574,3 +574,38 @@ function checkPath (g, source, destination){
   return found;
 
 }
+
+
+// Check if an undirected Graph is Tree or not
+
+function isTree(g) {
+  let visited = new Array(g.vertices).fill(false);
+  let stack = [];
+  visited[0] = true;
+  let node = g.list[0].getHead();
+  while(node !== null){
+    stack.push(node.data);
+    visited[node.data] = true;
+    node = node.nextElement;
+  }
+  while(stack.length){
+    let temp = stack.pop();
+    let node = g.list[temp].getHead();
+    while(node.nextElement !== null){
+      if(visited[node.data]){
+        return false;
+      }
+      else{
+        visited[node.data] = true;
+        stack.push(node.data);
+      }
+      node = node.nextElement;
+    }
+  }
+  for(let i = 0; i < g.vertices; i++){
+    if(visited[i] === false)
+      return false;
+  }
+  return true;
+}
+
