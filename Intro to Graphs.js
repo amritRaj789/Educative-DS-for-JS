@@ -642,5 +642,10 @@ function findMin (g, source, destination){
 }
 
 
-
-
+// Remove edge between 2 vertices
+function removeEdge (graph, source, dest){
+  let linkedList = graph.list[source];
+  linkedList.deleteVal(dest);
+  return graph;
+}
+//LOLLLLL Stupid questions require stupid answers. I just piggy-backed on LinkedList Class method
