@@ -532,3 +532,45 @@ function dfs (g, i, visited){
     }
   }
 }
+
+// Count the number of edges in an undirected graph
+
+function count(g){
+  let count;
+  for(let i = 0; i < g.vertices; i++){
+    let node = g.list[i].getHead();
+    while(node !== null){
+      count++;
+      node = node.nextElement;
+    }
+  }
+  return count/2;
+}
+
+// Check if a path exists between the given source and destination
+function checkPath (g, source, destination){
+  if(source === destination)
+    return true;
+  let visited = new Array(g.vertices).fill(false);
+  visited[source] = true;
+  let stack = new Stack();
+  let found = false;
+  stack.push(source);
+  while(!stack.isEmpty()){
+    let temp = stack.pop();
+    let node = g.list[temp].getHead();
+    while(node !== null){
+      if(!visited[node.data]){
+        if(node.data == destination){
+          found = true;
+          break;
+        }
+        stack.push(node.data);
+        visited[node.data] = true;
+      }
+      node = node.nextElement;
+    }
+  }
+  return found;
+
+}
