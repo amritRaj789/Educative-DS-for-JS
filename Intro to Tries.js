@@ -231,3 +231,28 @@ function sortArray (arr){
 	help(trie.root, "");
 	return result;
 }
+
+/*Problem 4
+Word Formation from a dictionary using Trie
+You have to implement the isFormationPossible() function which will determine whether 
+a given word can be formed by combining two words from a given dictionary.
+*/
+
+function isFormationPossible (dict, word){
+	let trie = new Trie ();
+	for(let word of dict){
+		trie.insert(word);
+	}
+	let currentNode = trie.root;
+	let index;
+	for(let i = 0; i < word.length; i++){
+		index = trie.getIndex(word[i]);
+		if(currentNode.children[index] == null)
+			return false;
+		if(currentNode.children[index].isEndWord){
+			if(trie.search(word.slice(i+1)))
+				return true
+		}
+		currentNode = currentNode.children[index];
+	}
+}
