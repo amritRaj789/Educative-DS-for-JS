@@ -167,3 +167,24 @@ class Trie {
 
 let t = new Trie();
 console.log(t.getIndex('f'));
+
+/*Problem 1
+Total Number of Words in a Trie
+Given a Trie, find the total number of words in it.
+*/
+
+function totalWords(rootN){
+	let count = 0;
+	function help(node){
+		if(node.isEndWord)
+			count++;
+		for(let i = 0; i <= 25; i++){
+			if(node.children[i] !== null){
+				help(node.children[i])
+			}
+		}
+		return
+	}
+	help(rootN);
+	return count;
+}
