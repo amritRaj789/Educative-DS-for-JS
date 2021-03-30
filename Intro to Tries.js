@@ -188,3 +188,21 @@ function totalWords(rootN){
 	help(rootN);
 	return count;
 }
+
+Problem 2
+Find All words stored in Trie
+
+function findWords (root){
+	let result = [];
+	function help(node, string){
+		let newString = string + node.char;
+		if(node.isEndWord)
+			result.push(newString)
+		for(let i = 0; i < 26; i++){
+			if(node.children[i] !== null)
+				help(node.children[i], newString);
+		}
+	}
+	help(root, "");
+	return result;
+}
