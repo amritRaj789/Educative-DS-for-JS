@@ -206,3 +206,28 @@ function findWords (root){
 	help(root, "");
 	return result;
 }
+
+Problem 3
+Array sort using tries
+
+In this problem you have to implement the sortArray() function which will sort 
+the elements of the array of strings.
+
+function sortArray (arr){
+	let trie = new Trie();
+	for(let word of arr){
+		trie.insert(word);
+	}
+	let result = [];
+	function help (node, string){
+		let newString = string + node.char;
+		if(node.isEndWord)
+			result.push(newString);
+		for(let i = 0; i < 26; i++){
+			if(node.children[i] !== null)
+				help(node.children[i], newString);
+		}
+	}
+	help(trie.root, "");
+	return result;
+}
