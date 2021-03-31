@@ -231,31 +231,10 @@ newheap.removeMin()
 
 console.log(newheap.getMin())*/
 
-Challenge 1:
+/*Challenge 1:
 Convert Max-Heap to Min-Heap
-
-function convertMax(maxHeap) {
-	let heap = [...maxHeap];
-	let elements = maxHeap.length;
-	function minHeapify(index){
-		let left = 2 * index + 1;
-		let right = 2 * index + 2;
-		let smallest = index;
-		if((left < elements) && (heap[left] < heap[smallest]))
-			smallest = left;
-		if((right < elements) && (heap[right] < heap[smallest]))
-			smallest = right;
-		if(index !== smallest){
-			[heap[smallest], heap[index]] = [heap[index], heap[smallest]];
-			minHeapify(smallest);
-		}
-	}
-	for(let i = elements-1; i >= 0; i--){
-		minHeapify(i);
-	}
-	return heap;
-}
-
+Given a max heap array, write a function to convert it into a min heap array and return the array
+*/
 function convertMax(maxHeap) {
 	let heap = [...maxHeap];
 	let elements = maxHeap.length;
@@ -280,3 +259,18 @@ function convertMax(maxHeap) {
 	return heap;
 }
  
+
+Challenge 2:
+Find K smallest Elements in an Array
+
+
+function findKSmallest(arr,k){ 
+	 let heap = new minHeap();
+	 heap.buildHeap(arr);
+	 let result = [];
+	 for(let i = 1; i <= k; i++){
+	 	result.push(heap.getMin());
+	 	heap.removeMin();
+	 }
+	 return result;
+}
