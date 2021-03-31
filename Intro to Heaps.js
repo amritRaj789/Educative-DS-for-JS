@@ -230,3 +230,53 @@ console.log(newheap.getMin())
 newheap.removeMin()
 
 console.log(newheap.getMin())*/
+
+Challenge 1:
+Convert Max-Heap to Min-Heap
+
+function convertMax(maxHeap) {
+	let heap = [...maxHeap];
+	let elements = maxHeap.length;
+	function minHeapify(index){
+		let left = 2 * index + 1;
+		let right = 2 * index + 2;
+		let smallest = index;
+		if((left < elements) && (heap[left] < heap[smallest]))
+			smallest = left;
+		if((right < elements) && (heap[right] < heap[smallest]))
+			smallest = right;
+		if(index !== smallest){
+			[heap[smallest], heap[index]] = [heap[index], heap[smallest]];
+			minHeapify(smallest);
+		}
+	}
+	for(let i = elements-1; i >= 0; i--){
+		minHeapify(i);
+	}
+	return heap;
+}
+
+function convertMax(maxHeap) {
+	let heap = [...maxHeap];
+	let elements = maxHeap.length;
+	function minHeapify(index){
+		let left = 2 * index + 1;
+		let right = 2 * index + 2;
+		let smallest = index;
+		if((left < elements) && (heap[left] < heap[smallest]))
+			smallest = left;
+		if((right < elements) && (heap[right] < heap[smallest]))
+			smallest = right;
+		if(index !== smallest){
+			[heap[smallest], heap[index]] = [heap[index], heap[smallest]];
+			minHeapify(smallest);
+		}
+	}
+
+	// we have to only call minHeapify() for all possibe parent nodes, so we are starting from half of the array and not the end most
+	for(let i = Math.floor((elements-1)/2); i >= 0; i--){
+		minHeapify(i);
+	}
+	return heap;
+}
+ 
