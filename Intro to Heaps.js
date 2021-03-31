@@ -81,7 +81,7 @@ class maxHeap {
 		let max = this.heap[0];
 		this.heap[0] = this.heap[this.elements-1];
 		this.elements--;
-		this.maxHeapify();
+		this.maxHeapify(0);
 		return max;
 	}
 
@@ -145,3 +145,88 @@ console.log(heap.getMax())
 
 
 
+// Implementing Min Heap Class
+
+class minHeap {
+	constructor(){
+		this.heap = [];
+		this.elements = 0;
+	}
+
+	getMin(){
+		if(this.elements === 0)
+			return null
+		return this.heap[0];
+	}
+
+	insert(value){
+		if(this.elements < this.heap.length)
+			this.heap[this.elements] = value;
+		else
+			this.heap.push(value);
+		this.elements++;
+		this.bubbleUp(this.elements-1);
+	}
+
+	bubbleUp(index){
+		if(index <= 0)
+			return
+		let parent = Math.floor((index-1)/2);
+		if(this.heap[index] < this.heap[parent]){
+			[this.heap[parent], this.heap[index]] = [this.heap[index], this.heap[parent]];
+			this.bubbleUp(parent);
+		}
+	}
+
+	removeMin(){
+		if(this.elements == 0)
+			return null;
+		if(this.elements === 1){
+			this.elements--;
+			return this.heap[0];
+		}
+		let min = this.heap[0];
+		this.heap[0] = this.heap[this.elements-1];
+		this.elements--;
+		this.minHeapify(0);
+		return min;
+	}
+
+	minHeapify(index){
+		let left = index*2 + 1;
+		let right = index*2 + 2;
+		let smallest = index;
+		if((left < this.elements) && (this.heap[left] < this.heap[smallest]))
+			smallest = left;
+		if((right < this.elements) && (this.heap[right] < this.heap[smallest]))
+			smallest = right;
+		if(index !== smallest){
+			[this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]];
+			this.minHeapify(smallest);
+		}
+	}
+
+	buildHeap(arr){
+		this.heap = arr;
+		this.elements = this.heap.length;
+		for(let i = this.elements-1; i >= 0; i--){
+			this.minHeapify(i);
+		}
+	}
+}
+/*var heap = new minHeap()
+heap.insert(12)
+heap.insert(10)
+heap.insert(-10)
+heap.insert(100)
+
+console.log(heap.getMin())
+
+var newheap = new minHeap()
+var arr =  [6,9,3,4,13,22,1,30,17]
+newheap.buildHeap(arr)
+console.log(newheap.getMin())
+
+newheap.removeMin()
+
+console.log(newheap.getMin())*/
