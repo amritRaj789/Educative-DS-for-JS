@@ -274,3 +274,18 @@ function findKSmallest(arr,k){
 	 }
 	 return result;
 }
+
+Challenge 3:
+Find K largest Elements in an Array
+
+function findKLargest (lst, k){
+	let heap = new maxHeap();
+	heap.buildHeap(lst);
+	let result = [];
+	if(k > lst.length)
+		k = lst.length
+	for(let i = 1; i <= k; i++){
+		result.push(heap.removeMax());
+	}
+	return result;
+}
