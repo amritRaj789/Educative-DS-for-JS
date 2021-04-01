@@ -386,3 +386,20 @@ function tracePath(map){
 	}
 	return result;
 }
+
+/*Challenge 5
+Find 2 pairs in an Array such that a+b = c+d*/
+red red red red red red red red red red red red red
+function findPair (my_list){
+	let hash = {};
+	for(let i = 0; i < my_list.length-1; i++){
+		for(let j = i+1; j < my_list.length; j++){
+			let sum = my_list[i] + my_list[j];
+			if(sum in hash)
+				return [[my_list[i], my_list[j]], hash[sum]];
+			else
+				hash[sum] = [my_list[i], my_list[j]];
+			
+		}
+	}
+}
