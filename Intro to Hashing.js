@@ -266,3 +266,62 @@ class HashTable {
 	}
 }
 
+// Comparison Between Trees and Hash Tables
+On average, hash tables can perform search, insertion, and deletion in constant time
+whereas Trees usually work in O(log(N)).
+However in the worst case scenario, the performance of hash tables can come down to O(n) 
+where n is the total number of hash entries, whereas an AVL Tree would maintain the O(log(n))
+
+Hash Function
+An efficient hash table requires a smart hash function that would distribute the keys over all
+the space that is available to us. A tree is simpler to implement in this regard as it accesses 
+extra space only when needed and no hash function is required to optimize its structure.
+
+Order of Data
+If our application needs data to be ordered in a specific sequence, trees would prove more useful 
+because a BST or an AVL tree maintain its order.
+Hash tables are the smarter choice if your data
+
+/*Challenge 1 :
+Find if list2 is a subset of list1
+*/
+function isSubset(list1, list2){
+	let hash = {};
+	for(let num of list1){
+		hash[num] = true;
+	}
+	for(let num of list2){
+		if(!(num in hash))
+			return false;
+	}
+	return true;
+}
+
+//doing it using HashTable class that we created
+
+function isSubset(list1, list2){
+	let myHash = new HashTable();
+	for(let num of list1){
+		myHash.insert(num, true);
+	}
+	for(let num of list2){
+		if(myHash.search(num) === null)
+			return false;
+	}
+	return true;
+}
+
+/*Challenge 2
+Find if 2 arrays are disjoint (no common elements)
+*/
+function isDisjoint(list1, list2){
+	let myHash = new HashTable();
+	for(let num of list1){
+		myHash.insert(num, true);
+	}
+	for(let num of list2){
+		if(myHash.search(num) !== null)
+			return false;
+	}
+	return true;
+}
