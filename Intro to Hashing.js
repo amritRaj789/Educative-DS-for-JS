@@ -115,3 +115,154 @@ Resizing the Array:
 
 Some other strategies to handle collisions include quadratuc probing, bucket method, random probing, and key rehashing.
 We must use a strategy that best suits our hashing algorithm and the size of the data that we plan to store.
+
+
+Hash Table Implementation in Javascript
+
+Hash Table using Bucket Chaining
+
+We will use the chaining strategy along with the resize operation to avoid collisions in the table.
+All elements with the same hash key will be stored in an array at that index. In data structures, these arrays
+are called Buckets. The size of the hash table is set as n*m where n is the number of keys it can hold, 
+and m is the number of slots each bucket contains. Each slot holds a key/value pair
+
+HashEntry Class. It consists of three data members: the key, the value and the reference to a new entry.
+
+class HashEntry{
+	constructor(key, data){
+		this.key = key;
+		this.value = data;
+		this.next = null;
+	}
+}
+
+let entry = new HashEntry(3, "Educative");
+
+class HashTable {
+	constructor(){
+		this.slots = 10;	// size of the hash table
+		this.size = 0;		// current entries in the table
+		this.bucket = [];	// array of hashentry objects (by default all none)
+		for(let i = 0; i < this.slots; i++){
+			this.bucket[i] = null;
+		}
+	}
+	// Helper functions
+	getSize(){
+		return this.size;
+	}
+	isEmpty(){
+		return this.getSize() == 0;
+	}
+	resize(){
+		let new_slots = this.slots*2;
+		let new_buckets = new Array(new_slots).fill(null);
+		//rehash all items into new slots
+		for(let i = 0; i < this.bucket.length; i++){
+			let head = this.bucket[i];
+			while(head !== null){
+				let new_index = this.getIndex(head.key);
+				if(new_bucket[new_index] == null){
+					new_bucket[new_index] = new HashEntry(head.key, head.value);
+				}
+				else{
+					let node = new_bucket[new_index];
+					while(node != null){
+						if(node.key == head.key){
+							node.value = head.value;
+							node = null;
+						}
+						else if(node.next == null){
+							node.next = new HashEntry(head.key, head.value);
+							node = null;
+						}
+						else
+							node = node.next;
+					}
+				}
+				head = head.next;
+			}
+		}
+		this.bucket = new_bucket;
+	}
+	getIndex(key){
+		let index = key % this.slots;
+		return index;
+	}
+
+	insert(key, value){
+		// Find the node with the given key
+		let threshold = 0.6;
+		let b_Index = this.getIndex(key);
+		if(this.bucket[b_Index] === null){
+			this.bucket[b_Index] = new HashEntry(key, value);
+			console.log(String(key) + ", " + String(value) + " - inserted")
+		}
+		else{
+			let head = this.bucket[b_Index];
+			while(head !== null){
+				if(head.key === key){
+					head.value = value;
+					break;
+				}
+				else if(head.next == null){
+					head.next = new HashEntry(key, value);
+					console.log(String(key) + ", " + String(value) + " - inserted");
+					break;
+				}
+				head = head.next;
+			}
+		}
+		this.size += 1;
+		let load_factor = Number(this.size)/Number(this.slots);
+		// Checks if 60% of the entries in table are filled, threshold = 0.6
+		if(load_factor >= threshold){
+			this.resize();
+		}
+	}
+
+	search(key){
+		//find node with the given key
+		let b_Index = this.getIndex(key);
+		let head = this.bucket[b_Index];
+		//search key in the bucket
+		while(head !== null){
+			if(head.key === key)
+				return head.value;
+			head = head.next;
+		}
+		console.log("key not found");
+		return null;
+	}
+
+	deleteVal (key){
+		//find index
+		let b_Index = this.getIndex(key);
+		let head = this.bucket[b_Index];
+		//if key exists at first slot
+		if(head.key == key){
+			this.bucket[b_Index] = head.next;
+			console.log("key deleted");
+			this.size -= 1;
+			return;
+		}
+		// find key in slots
+		let prev = null;
+		while(head !== null){
+			//if key exists
+			if(head.key === key){
+				prev.next = head.next;
+				console.log("key deleted");
+				this.size -= 1;
+				return;
+			}
+			// else keep moving in chain
+			prev = head;
+			head = head.next;
+		}
+		//if key doesn't exist
+		console.log("key not found");
+		return;
+	}
+}
+
