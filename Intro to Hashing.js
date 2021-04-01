@@ -325,3 +325,40 @@ function isDisjoint(list1, list2){
 	}
 	return true;
 }
+
+/*Challenge 3
+Find Symmetric Pairs in array
+*/
+function findSymmetric(my_list){
+  let hash = new HashTable();
+  let result = [];
+  for(let i = 0; i < my_list.length; i++){
+  	hash.insert(my_list[i][0], my_list[i][1]);
+  }
+  for(let i = 0; i < my_list.length; i++){
+  	if(hash.search(my_list[i][1]) == my_list[i][0])
+  		result.push([my_list[i][1], my_list[i][0]]);
+  }
+  return result
+}
+
+// An even more efficient way
+
+function findSymmetric(my_list){
+	let hash = new HashTable();
+	let result = [];
+	for(let i = 0 ; i < my_list.length; i++){
+		let first = my_list[i][0];
+		let second = my_list[i][1];
+		let value = hash.search(second);
+		if(value !== null && value == first){
+			result.push([second, first]);
+			result.push([first, second]);
+		}
+		else
+			hash.insert(first, second);
+	}
+	return result;
+}
+
+
