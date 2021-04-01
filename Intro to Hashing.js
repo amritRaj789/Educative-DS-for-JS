@@ -362,3 +362,27 @@ function findSymmetric(my_list){
 }
 
 
+/*Challenge 4:
+Trace the Complete Path of A Journey
+You have to implement the tracePath() function which will take in a list of source-destination pairs 
+and return the correct sequence of the whole journey from the first city to the last.
+*/
+function tracePath(map){
+	let start = "";
+	let right = {};
+	for(let city in map){
+		right[map[city]] = 1;
+	}
+	for(let city in map){
+		if(!(city in right)){
+			start = city;
+			break;
+		}
+	}
+	let result = [];
+	for(let i = 1; i <= Object.keys(map).length; i++){
+		result.push([start, map[start]]);
+		start = map[start];
+	}
+	return result;
+}
