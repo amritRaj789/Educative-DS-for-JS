@@ -476,3 +476,24 @@ function removeDuplicates(list){
 	}
 	return list;
 }
+
+/*Challenge 10
+Union of Linked Lists
+Given 2 linked lists, return their union
+*/
+function union (list1, list2){
+	let hash = {};
+	let head1 = list1.head;
+	while(head1 !== null){
+		hash[head1.data] = 1
+		head1 = head1.nextElement;
+	}
+	let head2 = list2.head;
+	while(head2 !== null){
+		if(!(head2.data in hash)){
+			list1.insertAtHead(head2.data);
+		}
+		head2 = head2.nextElement;
+	}
+	return list1;
+}
