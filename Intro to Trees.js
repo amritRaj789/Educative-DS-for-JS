@@ -405,3 +405,20 @@ function findMin(rootNode){
 	return smallest;
 }
 
+// Find k-th maximum value in a BST
+function findKthMax(rootNode,k){
+	let stack = [];
+	function dfs(node){
+		if(node === null)
+			return
+		dfs(node.leftChild);
+		stack.push(node.val);
+		dfs(node.rightChild)
+	}
+	dfs(rootNode);
+	while(k > 1){
+		stack.pop();
+		k--;
+	}
+	return stack.pop();
+}
