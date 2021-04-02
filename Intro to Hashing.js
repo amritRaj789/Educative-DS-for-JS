@@ -421,3 +421,19 @@ function findSubZero(my_list){
 	return false;
 }
 //this is a brilliant solution
+
+/*Challenge 7
+Two Sum
+Find 2 numbers from the given array whose sum equals the input value.
+Return false if no such pair exists. If more than one such pair exist, return any one pair
+*/
+function findSum(arr, value){
+	let hash = {};
+	for(let i = 0; i < arr.length; i++){
+		if(arr[i] in hash)
+			return ([hash[arr[i]], arr[i]]);
+		else
+			hash[value-arr[i]] = arr[i];
+	}
+	return false;
+}
