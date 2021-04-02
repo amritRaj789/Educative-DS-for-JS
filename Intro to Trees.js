@@ -389,3 +389,19 @@ Properties of Red-Black Trees:
 
 	One key feature of a 2-3 Tree is that it remains balanced, no matter how many insertions or deletions you perform.
 	The leaf nodes are always present on the same level and are quite small in number.
+
+
+I HAVE SKIPPED EVERYTHING UPTO BST
+
+//Problems on BST
+
+// Find the minimum Value in a BST
+function findMin(rootNode){
+	let smallest;
+	while(rootNode !== null){
+		smallest = rootNode.val;
+		rootNode = rootNode.leftChild;
+	}
+	return smallest;
+}
+
