@@ -455,3 +455,24 @@ function  findFirstUnique (arr){
 	}
 	return null;
 }
+
+/*Challenge 9
+Given a linkedlist, remove any duplicate nodes it might have.
+*/
+function removeDuplicates(list){
+	let head = list.head;
+	let prev = null;
+	let hash = {};
+	while(head !== null){
+		if(!(head.data in hash)){
+			hash[head.data] = 1;
+			prev = head;
+			head = head.nextElement;
+		}
+		else{
+			prev.nextElement = head.nextElement;
+			head = head.nextElement;
+		}
+	}
+	return list;
+}
