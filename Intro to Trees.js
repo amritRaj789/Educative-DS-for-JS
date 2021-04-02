@@ -416,9 +416,51 @@ function findKthMax(rootNode,k){
 		dfs(node.rightChild)
 	}
 	dfs(rootNode);
-	while(k > 1){
-		stack.pop();
-		k--;
+	return stack[stack.length-k];
+}
+
+red red red red red red red red red
+// Educative's reverseInorder traversal
+
+function reverseInOrder(rootNode, k) {
+	if (rootNode) {
+		var rightChild = reverseInOrder(rootNode.rightChild, k)
+
+		if (rightChild) {
+			if (counter == k) {
+				return rightChild;
+			}
+
+		} else {
+			counter++;
+			if (k == counter) {
+				return rootNode;
+			}
+			return reverseInOrder(rootNode.leftChild, k)
+		}
+
 	}
-	return stack.pop();
+}
+
+Challenge 3
+Find Ancestors of a Given Node in a BST
+
+function findAncestors(rootNode, k){
+	if(rootNode.val === k)
+		return null
+	let result = [];
+	let head = rootNode;
+	while(head !== null){
+		if(k > head.val){
+			result.unshift(head.val);
+			head = head.rightChild;
+		}
+		else if(k < head.val){
+			result.unshift(head.val);
+			head = head.leftChild;
+		}
+		else
+			return result;
+	}
+	return null;
 }
