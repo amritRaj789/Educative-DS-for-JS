@@ -403,3 +403,21 @@ function findPair (my_list){
 		}
 	}
 }
+
+Challenge 6: A Subarray with a Sum of 0
+red red red red red red red red red red red red red red red
+
+function findSubZero(my_list){
+	let hMap = new HashTable();
+	let sum = 0;
+	// traverse through the given array
+	for(let i = 0; i < my_list.length; i++){
+		sum += my_list[i];
+		if(my_list[i] == 0 || sum == 0 || hMap.search(sum) !== null){
+			return true;
+		}
+		hMap.insert(sum, i);
+	}
+	return false;
+}
+//this is a brilliant solution
