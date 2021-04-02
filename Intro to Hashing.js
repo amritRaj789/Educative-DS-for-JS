@@ -437,3 +437,21 @@ function findSum(arr, value){
 	}
 	return false;
 }
+
+/*Challenge 8
+Return first unique integer in the given array (number that appears only once in the array)
+Return null if no unique number exists
+*/
+function  findFirstUnique (arr){
+	let hash = {};
+	for(let num of arr){
+		if(!(num in hash))
+			hash[num] = 0;
+		hash[num]++;
+	}
+	for(let num of arr){
+		if(hash[num] === 1)
+			return num;
+	}
+	return null;
+}
