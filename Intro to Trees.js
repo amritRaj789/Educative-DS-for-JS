@@ -394,7 +394,7 @@ Properties of Red-Black Trees:
 I HAVE SKIPPED EVERYTHING UPTO BST
 
 //Problems on BST
-
+// Challenge 1
 // Find the minimum Value in a BST
 function findMin(rootNode){
 	let smallest;
@@ -405,6 +405,7 @@ function findMin(rootNode){
 	return smallest;
 }
 
+// Challenge 2
 // Find k-th maximum value in a BST
 function findKthMax(rootNode,k){
 	let stack = [];
@@ -422,6 +423,10 @@ function findKthMax(rootNode,k){
 red red red red red red red red red
 // Educative's reverseInorder traversal
 
+function findKthMax(rootNode, k){
+	counter = 0;
+	return reverseInorder(rootNode, k).val;
+}
 function reverseInOrder(rootNode, k) {
 	if (rootNode) {
 		var rightChild = reverseInOrder(rootNode.rightChild, k)
@@ -442,9 +447,9 @@ function reverseInOrder(rootNode, k) {
 	}
 }
 
-Challenge 3
+/*Challenge 3
 Find Ancestors of a Given Node in a BST
-
+*/
 function findAncestors(rootNode, k){
 	if(rootNode.val === k)
 		return null
@@ -464,3 +469,42 @@ function findAncestors(rootNode, k){
 	}
 	return null;
 }
+
+//recursive solution
+
+function findAncestors(rootNode, k){
+	let result = [];
+	recfindAncestors(rootNode, k, result);
+	return result;
+}
+
+function findAncestors(rootNode,k,result){
+	if(rootNode == null)
+		return false;
+	else if(rootNode.val == k)
+		return true;
+	else if((recfindAncestors(rootNode.leftChild, k, result)) || recfindAncestors(rootNode.rightChild, k , result)){
+		result.push(rootNode.val)
+		return true;
+	}
+	return false;
+}
+
+/*Challenge 4
+Find the height of a BST
+*/
+
+function findHeight(rootNode){
+	let maxHeight = 0;
+	function dfs(node, height){
+		if(node == null){
+			maxHeight = Math.max(height, maxHeight);
+			return
+		}
+		dfs(node.leftChild, height+1)
+		dfs(node.rightChild, height+1);
+	}
+	dfs(rootNode, -1)
+	return maxHeight;
+}
+
