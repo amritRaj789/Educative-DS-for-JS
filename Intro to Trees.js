@@ -508,3 +508,52 @@ function findHeight(rootNode){
 	return maxHeight;
 }
 
+/*Challenge 5
+Find nodes at K distance
+*/
+//Iterative
+function findKNodes(rootNode, k) {
+   let queue = [rootNode];
+    while(queue.length !== 0){
+    	count = queue.length;
+    	if(k === 0){
+    		arr = [];
+    		while(count > 0){
+    			temp = queue.shift();
+    			arr.push(temp.val);
+    			count --;
+    		}
+    		return arr;
+    	}
+    	else{
+	    	while(count > 0){
+	    		temp = queue.shift();
+	    		if(temp.leftChild)
+	    			queue.push(temp.leftChild);
+	    		if(temp.rightChild)
+	    			queue.push(temp.rightChild);
+	    		count--;
+	    	}
+	    	k--;
+    	}
+    }
+}
+
+//recursive
+function findKNodes(rootNode, k){
+	let result = [];
+
+	function recursive(node, l){
+		if(l === k){
+			result.push(node.val);
+			return;
+		}
+		if(node.leftChild){
+			recursive(node.leftChild, l+1)
+		}
+		if(node.rightChild)
+			recursive(node.rightChild, l+1)
+	}
+	recursive(rootNode, 0);
+	return result;
+}
