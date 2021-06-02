@@ -7,21 +7,21 @@ binary trees with two special properties.*/
 //-> The nodes must be ordered according to the Heap Order Property
 
 	//The Heap Order property is different for the 2 heap structures that we are going to study
-		->Min Heap 	(Based on Min Heap property)
-		->Max Heap  (Based on Max Heap property)
+		// ->Min Heap 	(Based on Min Heap property)
+		// ->Max Heap  (Based on Max Heap property)
 
-MAX HEAP PROPERTY
+//MAX HEAP PROPERTY
 	/*All the parent node keys must be greater than or equal to their child node keys in max-heaps.
 	So the root node will always contain the largest element in the heap.
 	If node A has a child node B, then key(A) >= key(B)*/
 
-MIN HEAP PROPERTY
+//MIN HEAP PROPERTY
 	/*All the parent node keys are less than or equal to their child node keys. So, the root node,
 	will always contain the smallest element present in the Heap.
 	If node A has a child node B, key(A) <= key(B)*/
 
 
-Where are heaps used?
+//Where are heaps used?
 
 /*The primary purpose of heaps is to return the smallest or largest element.
 This is because the time complexity of getting the minimum/maximum value from a min/max heap is O(1).
@@ -30,17 +30,17 @@ Some of the famous algorithms implemented using heaps are Prim's Algorithm,
 Djikstra's Algorithm and the famous Heap Sort algorithm.
 */
 
-Heaps can be implemented using arrays. The parent nodes lie in the first half of the array and the leaf nodes in the remainig half.
+/* Heaps can be implemented using arrays. The parent nodes lie in the first half of the array and the leaf nodes in the remainig half.
 parent node index <= floor(n-1/2). It is similar to level by level traversal of the binary tree.
 
 Heaps are sometimes called Binary Heaps because they are binary trees. Also, the Heap data structure is not the same as heap memory.
 Elements of heaps are not sorted at all.
+ */
 
+//MAX HEAP
 
-MAX HEAP
-
-the __percolateUp() function is meant to restore the heap property going up from a node to the root.
-the __maxHeapify() function restores the heap property starting from a given node down to the leaves.
+//the __percolateUp() function is meant to restore the heap property going up from a node to the root.
+//the __maxHeapify() function restores the heap property starting from a given node down to the leaves.
 
 
 
@@ -116,6 +116,7 @@ class maxHeap {
 		for(let i = this.heap.length - 1; i >= 0; i--){
 			this.maxHeapify(i);
 		}
+		// do we really need to maxHeapify all the leaf nodes. Cannot we just maxHeapify the parent nodes
 	}
 	// The worst time complexity of buildHeap is O(n)
 }

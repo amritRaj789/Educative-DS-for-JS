@@ -43,7 +43,7 @@ and a min of 0 child nodes. Binary trees are extensively in a plethora of import
 // children nodes are called left and right children of the node.
 
 //Complete Binary Tree: 
-//all nodes except for the last level which can be filled from left to right
+//all nodes are filled except for the last level which can be filled from left to right
 // 2^h <= total number of nodes <= 2^(h+1) - 1
 // nodes are inserted level by level
 // fill in the left-subtree before moving to the right one
@@ -81,19 +81,19 @@ AVL tree*/
 
 
 //SKEWED BINARY TREE
-Skewed Binary Trees are BTs where all the nodes except one have one and only one child.
+/*Skewed Binary Trees are BTs where all the nodes except one have one and only one child.
 All of the children are nodes are either left or right child nodes, so the entire tree is positioned
 to the left or the right side. 
 This type of BTs should be avoided at all costs because the time complexities of most operations will be high.
-
+*/
 // Depending on if all the nodes are to the right or the left, we can have right skewed trees or left skewed trees
 
 
 //BINARY SEARCH TREES (BST)
 
-Binary Search Trees (BSTs) are a special kind of binary tree where each node of the tree has key-value pairs
+/*Binary Search Trees (BSTs) are a special kind of binary tree where each node of the tree has key-value pairs
 These key-value pairs can be anything like (username, bank) or (employee, employee-id)
-
+*/
 //THE BST Rule
 
 // For all the nodes in a BST, the values of all the nodes in the left subtree of a node are less than the value of that node.
